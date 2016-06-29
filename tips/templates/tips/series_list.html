@@ -1,0 +1,6 @@
+<h1>All Series:</h1>
+<ul>
+{% for s in series %}
+	<li><h2><a href="{% url 'tips:series_detail' s.id %}">{{ s.name }}</a></h2></li>
+{% endfor %}
+</ul>

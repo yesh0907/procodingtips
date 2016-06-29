@@ -1,9 +1,9 @@
 {% for tip in tips %}
 	<h2>{{ tip.title }}</h2>
-	<h6>{{ tip.author }}</h6>
-	<h4>Tip {{ tip.seriesnumber }} of {{ tip.seriesmax }} of Series {{ tip.seriesname }}</h4>
+	<h4>{{ tip.author }}</h4>
+	<h4>Tip {{ tip.order }} of {{ series_length }} of Series {{ tip.series.name }}</h4>
 	<h4>Resources we will be using: {{ tip.resources }}</h4>
 	<p>{{ tip.body }}</p>
-	<h4>{{ tip.pubdate }}</h4>
-	<h4>{{ tip.likes }} {{ tip.dislikes }}</h4>
+	<h4>Post on: {{ tip.pub_date }}</h4>
+	<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
 {% endfor %}

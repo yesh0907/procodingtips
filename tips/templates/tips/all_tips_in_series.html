@@ -1,0 +1,10 @@
+<h1>Series: {{ series.name }}</h1>
+{% for t in tip %}
+	<h2>{{ t.title }}</h2>
+	<h4>{{ t.author }}</h4>
+	<h4>Tip {{ t.order }} of {{ series_length }} of Series {{ t.series.name }}</h4>
+	<h4>Resources we will be using: {{ t.resources }}</h4>
+	<p>{{ t.body }}</p>
+	<h4>Post on: {{ t.pub_date }}</h4>
+	<h4>Likes: {{ t.likes }} Dislikes: {{ t.dislikes }}</h4>
+{% endfor %}
