@@ -5,6 +5,8 @@
 {% endblock title %}
 
 {% block body %}
+	{% include "navbar.html" with home="" tips="active" resources="" %}
+
 	<h2>Series: {{ series.name }}</h2>
 	{% for t in tip %}
 		<h3>{{ t.title }}</h3>

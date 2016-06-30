@@ -5,11 +5,18 @@
 {% endblock title %}
 
 {% block body %}
-	<h1>{{ group.name }}</h1>
-	<ul>
-		{% for r in resources %}
-			<li><a href="{{ r.link }}"><h2>{{ r.name }}</h2></a></li>
-			<p>{{ r.description }}</p>
-		{% endfor %}
-	</ul>
+	{% include "navbar.html" with home="" tips="" resources="active" %}
+
+	<div class="container">	
+		<ul class="list-unstyled">
+	  		<li><h2>{{ group.name }}</h2>
+	    		<ul>
+	    			{% for r in resources %}
+	      				<h4><a href="{{ r.link }}"><li>{{ r.name }}</li></a></h4>
+						<tiny>{{ r.description }}</tiny>
+	    			{% endfor %}
+	    		</ul>
+	  		</li>
+	  	</ul>
+  	</div>
 {% endblock body %}

@@ -5,17 +5,23 @@
 {% endblock title %}
 
 {% block body %}
-	{% for group in groups %}
-		<h2>{{ group.name }}:</h2>
-		<ul>
-			{% for resource in resources %}
-				{% for r in resource %}
-					{% if group == r.group %}
-						<li><a href="{{ r.link }}"><h3>{{ r.name }}</h3></a></li>
-						<p>{{ r.description }}</p>
-					{% endif %}
+	{% include "navbar.html" with home="" tips="" resources="active" %}
+
+	<div class="container">
+		{% for group in groups %}
+			<ul class="list-unstyled">
+				<h2><a href="{% url 'resources:group_detail' group.id %}">{{ group.name }}:</a></h2>
+				{% for resource in resources %}
+				<ul>
+					{% for r in resource %}
+						{% if group == r.group %}
+							<li><a href="{{ r.link }}"><h4>{{ r.name }}</h4></a></li>
+							<tiny>{{ r.description }}</tiny>
+						{% endif %}
+					{% endfor %}
+				</ul>
 				{% endfor %}
-			{% endfor %}
-		</ul>
-	{% endfor %}
+			</ul>
+		{% endfor %}
+	</div>
 {% endblock body %}
