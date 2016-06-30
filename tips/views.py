@@ -8,7 +8,7 @@ def all_series_list(request):
 	return render(request, 'tips/series_list.html', { 'series': series })
 
 def all_tip_list(request):
-	tips = Tip.objects.all()
+	tips = Tip.objects.all().order_by('-pub_date')
 	series_length = len(tips)
 	return render(request, 'tips/tip_list.html', { 'tips': tips, 'series_length': series_length })
 
