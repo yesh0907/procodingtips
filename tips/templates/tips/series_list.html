@@ -1,6 +1,14 @@
-<h1>All Series:</h1>
-<ul>
-{% for s in series %}
-	<li><h2><a href="{% url 'tips:series_detail' s.id %}">{{ s.name }}</a></h2></li>
-{% endfor %}
-</ul>
+{% extends "layout.html" %}
+
+{% block title %}
+	All Tip Series
+{% endblock title %}
+
+{% block body %}
+	<h1>All Series:</h1>
+	<ul>
+	{% for s in series %}
+		<li><h3><a href="{% url 'tips:series_detail' s.id %}">{{ s.name }}</a></h3></li>
+	{% endfor %}
+	</ul>
+{% endblock body %}

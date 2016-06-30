@@ -1,11 +1,14 @@
 {% load static from staticfiles %}
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>{% block title %}{% endblock title %}</title>
-		<link rel="stylesheet" href="{% static 'css/layout.css' %}"
+		<link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
 	</head>
 	<body>
 		{% block body %}{% endblock body %}
+		{% block navbar %}
+		
+		{% endblock navbar %}
 	</body>
 </html>

@@ -1,9 +1,17 @@
-{% for tip in tips %}
-	<h2>{{ tip.title }}</h2>
-	<h4>{{ tip.author }}</h4>
-	<h4>Tip {{ tip.order }} of {{ series_length }} of Series {{ tip.series.name }}</h4>
-	<h4>Resources we will be using: {{ tip.resources }}</h4>
-	<p>{{ tip.body }}</p>
-	<h4>Post on: {{ tip.pub_date }}</h4>
-	<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
-{% endfor %}
+{% extends "layout.html" %}
+
+{% block title %}
+	All Tips
+{% endblock title %}
+
+{% block body %}
+	{% for tip in tips %}
+		<h3>{{ tip.title }}</h3>
+		<h4>By: {{ tip.author }}</h4>
+		<h4>Tip {{ tip.order }} of {{ series_length }} of Series {{ tip.series.name }}</h4>
+		<h4>Resources we will be using: {{ tip.resources }}</h4>
+		<p>{{ tip.body }}</p>
+		<h4>Post on: {{ tip.pub_date }}</h4>
+		<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
+	{% endfor %}
+{% endblock body %}

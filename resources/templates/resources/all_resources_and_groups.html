@@ -1,13 +1,21 @@
-{% for group in groups %}
-	<h1>{{ group.name }}:</h1>
-	<ul>
-		{% for resource in resources %}
-			{% for r in resource %}
-				{% if group == r.group %}
-					<li><a href="{{ r.link }}"><h2>{{ r.name }}</h2></a></li>
-					<p>{{ r.description }}</p>
-				{% endif %}
+{% extends "layout.html" %}
+
+{% block title %}
+	Groups and Resources
+{% endblock title %}
+
+{% block body %}
+	{% for group in groups %}
+		<h2>{{ group.name }}:</h2>
+		<ul>
+			{% for resource in resources %}
+				{% for r in resource %}
+					{% if group == r.group %}
+						<li><a href="{{ r.link }}"><h3>{{ r.name }}</h3></a></li>
+						<p>{{ r.description }}</p>
+					{% endif %}
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
-	</ul>
-{% endfor %}
+		</ul>
+	{% endfor %}
+{% endblock body %}
