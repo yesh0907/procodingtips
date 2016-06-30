@@ -14,7 +14,7 @@ def all_tip_list(request):
 
 def all_tips_in_series(request, pk):
 	series = get_object_or_404(Series, pk=pk)
-	tip = Tip.objects.filter(series=series)
+	tip = Tip.objects.filter(series=series).order_by('-pub_date')
 	series_length = len(tip)
 	context = {
 		'series': series,
