@@ -1,0 +1,7 @@
+<h1>{{ group.name }}</h1>
+<ul>
+	{% for r in resources %}
+		<li><a href="{{ r.link }}"><h2>{{ r.name }}</h2></a></li>
+		<p>{{ r.description }}</p>
+	{% endfor %}
+</ul>

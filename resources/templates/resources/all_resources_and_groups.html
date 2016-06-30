@@ -1,0 +1,13 @@
+{% for group in groups %}
+	<h1>{{ group.name }}:</h1>
+	<ul>
+		{% for resource in resources %}
+			{% for r in resource %}
+				{% if group == r.group %}
+					<li><a href="{{ r.link }}"><h2>{{ r.name }}</h2></a></li>
+					<p>{{ r.description }}</p>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</ul>
+{% endfor %}

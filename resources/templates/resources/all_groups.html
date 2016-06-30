@@ -1,0 +1,3 @@
+{% for group in groups %}
+	<a href="{% url 'resources:group_detail' group.id %}"><h2>{{ group.name }}</h2></a>
+{% endfor %}
