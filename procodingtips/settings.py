@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'procodingtips',
         'USER': 'yesh0907',
         'PASSWORD': 'steven0907',
-        'HOST': 'locahost',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
