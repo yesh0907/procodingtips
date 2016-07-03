@@ -5,26 +5,8 @@
 {% endblock title %}
 
 {% block body %}
-	{% for tip in tips %}
-	
+	{% include "navbar.html" with home="" tips="active" resources="" %}
 	<div class="container">
-		<bold><h2>{{ tip.title }}</h2></bold>
-		<h5 style="color: gray;">By: {{ tip.author }}</h5>
-		<h4>Tip {{ tip.order }} of {{ series_length }} of Series {{ tip.series.name }}</h4>
-		<!--
-		<h4>
-		Resources we will be using:
-		{ % for resources in tip % }
-
-		{ % endfor %}
-		</h4>
-		-->
+		{% include "tips/tips_outline.html" %}
 	</div>
-
-
-		
-		<p>{{ tip.body }}</p>
-		<h4>Post on: {{ tip.pub_date }}</h4>
-		<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
-	{% endfor %}
 {% endblock body %}

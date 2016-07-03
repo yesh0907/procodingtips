@@ -1,0 +1,11 @@
+{% for tip in tips %}
+	<div class="container">
+		<bold><h2>{{ tip.title }}</h2></bold>
+		<h5 style="color: gray;">By: {{ tip.author }}</h5>
+		<h4>Tip {{ tip.order }} of {{ series_length }} in Series {{ tip.series.name }}</h4>
+		<h5>Resources used: {{ tip.resources }}</h5>
+		<p>{{ tip.body }}</p>
+		<h5>Post on: {{ tip.pub_date }}</h5>
+		<h5>{{ tip.likes }}&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span> {{ tip.dislikes }}&nbsp;<span class="glyphicon glyphicon-thumbs-down"></span></h5>
+	</div>
+{% endfor %}
