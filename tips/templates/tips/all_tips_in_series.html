@@ -7,14 +7,45 @@
 {% block body %}
 	{% include "navbar.html" with home="" tips="active" resources="" %}
 
-	<h2>Series: {{ series.name }}</h2>
-	{% for t in tip %}
-		<h3>{{ t.title }}</h3>
-		<h4>{{ t.author }}</h4>
-		<h4>Tip {{ t.order }} of {{ series_length }} of Series {{ t.series.name }}</h4>
-		<h4>Resources we will be using: {{ t.resources }}</h4>
-		<p>{{ t.body }}</p>
-		<h4>Post on: {{ t.pub_date }}</h4>
-		<h4>Likes: {{ t.likes }} Dislikes: {{ t.dislikes }}</h4>
-	{% endfor %}
+	<div class="container">
+		<h2>Series: {{ series.name }}</h2>
+		{% include "tips/tips_outline.html" with tips=tips %}
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.like').click(function() {
+				$.ajax({
+					type: 'POST',
+					url: "/tips/likes/",
+					data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+					dataType: 'json',
+					success: function(response) {
+						var likes = parseInt($('.likes-span').text());
+						var currentLikes = likes + 1; 
+						$('.likes-span').text(currentLikes);
+					},
+					error: function(rs, e) {
+						console.error(rs);
+					}
+				});
+			});
+			$('.dislikes').click(function() {
+				$.ajax({
+					type: 'POST',
+					url: "/tips/dislikes/",
+					data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+					dataType: 'json',
+					success: function(response) {
+						var dislikes = parseInt($('.dislikes-span').text());
+						var currentDislikes = dislikes + 1; 
+						$('.dislikes-span').text(currentDislikes);
+					},
+					error: function(rs, e) {
+						console.error(rs);
+					}
+				});
+			});
+		});
+	</script>
 {% endblock body %}
