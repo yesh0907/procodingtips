@@ -1,0 +1,50 @@
+{% for tip in tips %}
+	<bold><h2>{{ tip.title }}</h2></bold>
+	<h5 style="color: gray;">By: {{ tip.author }}</h5>
+	<h4>Tip {{ tip.order }} of {{ series_length }} in Series {{ tip.series.name }}</h4>
+	<h5>Resources used: {{ tip.resources }}</h5>
+	<p>{{ tip.body|safe }}</p>
+	<h5>Post on: {{ tip.pub_date }}</h5>
+	<h5>
+		<span class="likes-span-{{ tip.id }}">{{ tip.likes }}</span>
+		&nbsp;<span class="glyphicon glyphicon-thumbs-up like" name="{{ tip.id }}"></span>
+		<span class="dislikes-span-{{ tip.id }}">{{ tip.dislikes }}</span>
+		&nbsp;<span class="glyphicon glyphicon-thumbs-down dislikes" name="{{ tip.id }}"></span>
+	</h5>
+{% endfor %}
+<script>
+	$(document).ready(function() {
+		$('.like').click(function() {
+			$.ajax({
+				type: 'POST',
+				url: "/tips/likes/",
+				data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+				dataType: 'json',
+				success: function(response) {
+					var likes = response['likes'];
+					var id = response['id'];
+					$('.likes-span-' + id).text(likes);
+				},
+				error: function(rs, e) {
+					console.error(rs);
+				}
+			});
+		});
+		$('.dislikes').click(function() {
+			$.ajax({
+				type: 'POST',
+				url: "/tips/dislikes/",
+				data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+				dataType: 'json',
+				success: function(response) {
+					var dislikes = response['dislikes'];
+					var id = response['id'];
+					$('.dislikes-span-' + id).text(dislikes);
+				},
+				error: function(rs, e) {
+					console.error(rs);
+				}
+			});
+		});
+	});
+</script>

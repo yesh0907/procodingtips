@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% load static %}
+
+
+{% block title %}
+	{{ series.name }} Tips
+{% endblock title %}
+
+{% block body %}
+	{% include "navbar.html" with home="" tips="active" resources="" %}
+
+	<div class="container">
+		<h2>Series: {{ series.name }}</h2>
+		{% include "tips/tips_outline.html" with tips=tips %}
+	</div>
+{% endblock body %}

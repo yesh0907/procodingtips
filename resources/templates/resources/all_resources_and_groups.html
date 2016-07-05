@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Groups and Resources
+{% endblock title %}
+
+{% block body %}
+	{% include "navbar.html" with home="" tips="" resources="active" %}
+
+	<div class="container">
+		{% if hasGroups %}
+			{% for group in groups %}
+				<ul class="list-unstyled">
+					<h2><a href="{% url 'resources:group_detail' group.id %}">{{ group.name }}:</a></h2>
+					{% for resource in resources %}
+					<ul>
+						{% for r in resource %}
+							{% if group == r.group %}
+								<li><a href="{{ r.link }}"><h4>{{ r.name }}</h4></a></li>
+								<tiny>{{ r.description }}</tiny>
+							{% endif %}
+						{% endfor %}
+					</ul>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		{% else %}
+			<h2>No Groups or Resources</h2>
+		{% endif %}
+	</div>
+{% endblock body %}
