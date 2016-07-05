@@ -100,3 +100,5 @@ ENV/
 __pycache__/
 local_settings.py
 media
+
+sftp-config.json
