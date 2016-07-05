@@ -10,9 +10,8 @@ def like(request):
 		tip = get_object_or_404(Tip, pk=tipID)
 		tip.likes += 1
 		tip.save()
-		message = tip.likes
 
-		ctx  = {'likes': tip.likes, 'message': message}
+		ctx  = {'likes': tip.likes, 'id': tipID}
 		return HttpResponse(json.dumps(ctx), content_type='application/json')
 	else:
 		return HttpResponse("No Data.")
@@ -23,9 +22,8 @@ def dislike(request):
 		tip = get_object_or_404(Tip, pk=tipID)
 		tip.dislikes += 1
 		tip.save()
-		message = tip.dislikes
 
-		ctx  = {'dislikes': tip.dislikes, 'message': message}
+		ctx  = {'dislikes': tip.dislikes, 'id': tipID}
 		return HttpResponse(json.dumps(ctx), content_type='application/json')
 	else:
 		return HttpResponse("No Data.")
