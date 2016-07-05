@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
+{% load static %}
+
 
 {% block title %}
 	{{ series.name }} Tips
@@ -11,41 +13,4 @@
 		<h2>Series: {{ series.name }}</h2>
 		{% include "tips/tips_outline.html" with tips=tips %}
 	</div>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.like').click(function() {
-				$.ajax({
-					type: 'POST',
-					url: "/tips/likes/",
-					data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-					dataType: 'json',
-					success: function(response) {
-						var likes = parseInt($('.likes-span').text());
-						var currentLikes = likes + 1; 
-						$('.likes-span').text(currentLikes);
-					},
-					error: function(rs, e) {
-						console.error(rs);
-					}
-				});
-			});
-			$('.dislikes').click(function() {
-				$.ajax({
-					type: 'POST',
-					url: "/tips/dislikes/",
-					data: {'id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-					dataType: 'json',
-					success: function(response) {
-						var dislikes = parseInt($('.dislikes-span').text());
-						var currentDislikes = dislikes + 1; 
-						$('.dislikes-span').text(currentDislikes);
-					},
-					error: function(rs, e) {
-						console.error(rs);
-					}
-				});
-			});
-		});
-	</script>
 {% endblock body %}
