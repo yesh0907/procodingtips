@@ -5,10 +5,17 @@
 {% endblock title %}
 
 {% block body %}
-	<h1>All Series:</h1>
-	<ul>
-	{% for s in series %}
-		<li><h3><a href="{% url 'tips:series_detail' s.id %}">{{ s.name }}</a></h3></li>
-	{% endfor %}
-	</ul>
+	{% include "navbar.html" with home="" tips="active" resources="" %}
+	
+	<div class="container">
+		<ul class="list-unstyled">
+	  		<li><h2>All Series</h2>
+	    		<ul>
+	    			{% for s in series %}
+	      				<h4><a href="{% url 'tips:series_detail' s.id %}"><li>{{ s.name }}</li></a></h4>
+	    			{% endfor %}
+	    		</ul>
+	  		</li>
+	  	</ul>
+	</div>
 {% endblock body %}

@@ -5,6 +5,7 @@ from .models import Series, Tip
 # Create your views here.
 def all_series_list(request):
 	series = Series.objects.all()
+	print series
 	return render(request, 'tips/series_list.html', { 'series': series })
 
 def all_tip_list(request):

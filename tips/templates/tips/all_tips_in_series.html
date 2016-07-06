@@ -5,14 +5,42 @@
 {% endblock title %}
 
 {% block body %}
-	<h2>Series: {{ series.name }}</h2>
-	{% for t in tip %}
-		<h3>{{ t.title }}</h3>
-		<h4>{{ t.author }}</h4>
-		<h4>Tip {{ t.order }} of {{ series_length }} of Series {{ t.series.name }}</h4>
-		<h4>Resources we will be using: {{ t.resources }}</h4>
-		<p>{{ t.body }}</p>
-		<h4>Post on: {{ t.pub_date }}</h4>
-		<h4>Likes: {{ t.likes }} Dislikes: {{ t.dislikes }}</h4>
-	{% endfor %}
+	{% include "navbar.html" with home="" tips="active" resources="" %}
+
+	<div class="container">
+		<h2>Series: {{ series.name }}</h2>
+		{% for t in tip %}
+			<bold><h2>{{ t.title }}</h2></bold>
+			<h5 style="color: gray;">By: {{ t.author }}</h5>
+			<h4>Tip {{ t.order }} of {{ series_length }} of Series {{ t.series.name }}</h4>
+			<h4>
+			<div style="position: relative">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    	Resources
+				    	<span class="caret"></span>
+				  	</button>
+				  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    	<li>{{ t.resources }}</li>
+				  	</ul>
+				</div>
+			</div>
+			</h4>
+			<br>
+			<p>{{ t.body }}</p>
+			</br>
+			<div class="row">
+				<div class="col-xs-6">
+					<h4>Posted on: {{ t.pub_date }}</h4>
+				</div>
+				<div class="col-xs-6">
+					<h4>Likes: {{ t.likes }} Dislikes:{{ t.dislikes }}</h4>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+
+
 {% endblock body %}

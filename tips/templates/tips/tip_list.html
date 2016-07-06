@@ -5,13 +5,41 @@
 {% endblock title %}
 
 {% block body %}
+	{% include "navbar.html" with home="" tips="active" resources="" %}
 	{% for tip in tips %}
-		<h3>{{ tip.title }}</h3>
-		<h4>By: {{ tip.author }}</h4>
+	
+	<div class="container">
+		<bold><h2>{{ tip.title }}</h2></bold>
+		<h5 style="color: gray;">By: {{ tip.author }}</h5>
 		<h4>Tip {{ tip.order }} of {{ series_length }} of Series {{ tip.series.name }}</h4>
-		<h4>Resources we will be using: {{ tip.resources }}</h4>
+		<h4>
+		<div style="position: relative">
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    	Resources
+			    	<span class="caret"></span>
+			  	</button>
+			  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			    	<li>{{ tip.resources }}</li>
+			  	</ul>
+			</div>
+		</div>
+		</h4>
+		<br>
 		<p>{{ tip.body }}</p>
-		<h4>Post on: {{ tip.pub_date }}</h4>
-		<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
+		</br>
+		<div class="row">
+			<div class="col-xs-6">
+				<h4>Posted on: {{ tip.pub_date }}</h4>
+			</div>
+			<div class="col-xs-6">
+				<h4>Likes: {{ tip.likes }} Dislikes:{{ tip.dislikes }}</h4>
+			</div>
+		</div>
+	</div>
+
+
+		
+		
 	{% endfor %}
 {% endblock body %}
