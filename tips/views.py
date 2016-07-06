@@ -4,6 +4,33 @@ import json
 
 from .models import Series, Tip
 
+def sort_resources(request):
+	if request.method == 'POST':
+		tipTitle = request.POST.get('tip', None)
+		tip = get_object_or_404(Tip, title=tipTitle)
+		tipID = tip.pk
+
+		resources = {}
+		currentResources = tip.resources.replace(', ', ' ')
+		resource = []
+		previousIndex = 0
+		for index in range(0, len(currentResources)):
+			char = currentResources[index]
+			if " " == char:
+				resource.append(currentResources[previousIndex:index])
+				previousIndex = index + 1
+			elif index == len(currentResources) - 1:
+				resource.append(currentResources[previousIndex:])
+
+		for i in range(0, len(resource)):
+			resources[i] = resource[i]
+
+		ctx = { 'resources': resources, 'id': tipID }
+
+		return HttpResponse(json.dumps(ctx), content_type='application/json')
+	else:
+		return HttpResponse("No Data.")
+
 def like(request):
 	if request.method == 'POST':
 		tipID = request.POST.get('id', None)

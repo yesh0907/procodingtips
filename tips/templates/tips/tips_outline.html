@@ -1,8 +1,20 @@
 {% for tip in tips %}
-	<bold><h2>{{ tip.title }}</h2></bold>
+	<bold><h2 class="title">{{ tip.title }}</h2></bold>
 	<h5 style="color: gray;">By: {{ tip.author }}</h5>
 	<h4>Tip {{ tip.order }} of {{ series_length }} in Series {{ tip.series.name }}</h4>
-	<h5>Resources used: {{ tip.resources }}</h5>
+	<div class="row">
+		<div class="col-xs-12 col-md-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Resources Used:</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="resources-{{ tip.id }}">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	<p>{{ tip.body|safe }}</p>
 	<h5>Post on: {{ tip.pub_date }}</h5>
 	<h5>
@@ -12,8 +24,43 @@
 		&nbsp;<span class="glyphicon glyphicon-thumbs-down dislikes" name="{{ tip.id }}"></span>
 	</h5>
 {% endfor %}
+
+<script>
+	function getResources() {
+		var tips = [];
+		$('.title').each((i, obj) => {
+			var tipTitle = obj.textContent;
+			tips.push(tipTitle);
+		});
+
+		for (var i in tips) {
+			var tip = tips[i];
+			$.ajax({
+					type: 'POST',
+					url: '/tips/sort-resources/',
+					data: {'tip': tip, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+					dataType: 'json',
+					success: function(response) {
+						alert('SUCCESS');
+						var id = response['id'];
+						var resources = response['resources'];
+						for (var i in resources) {
+							var resource = resources[i];
+							$(`.resources-${id}`).append(`<li><h5>${resource}</h5></li>`);
+						}
+					},
+					error: (rs, e) => {
+						alert(rs);
+						console.log(rs);
+					}
+			})
+		}
+	}
+</script>
 <script>
 	$(document).ready(function() {
+		getResources();
+
 		$('.like').click(function() {
 			$.ajax({
 				type: 'POST',
@@ -30,6 +77,7 @@
 				}
 			});
 		});
+
 		$('.dislikes').click(function() {
 			$.ajax({
 				type: 'POST',
