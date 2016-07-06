@@ -41,7 +41,6 @@
 					data: {'tip': tip, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
 					dataType: 'json',
 					success: function(response) {
-						alert('SUCCESS');
 						var id = response['id'];
 						var resources = response['resources'];
 						for (var i in resources) {
@@ -50,7 +49,6 @@
 						}
 					},
 					error: (rs, e) => {
-						alert(rs);
 						console.log(rs);
 					}
 			})
